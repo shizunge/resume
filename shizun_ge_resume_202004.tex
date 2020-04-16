@@ -1,0 +1,333 @@
+% use xelatex
+% To install the font:
+% sudo add-apt-repository ppa:texlive-backports/ppa
+% sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
+\documentclass[10pt,letter]{article}
+\usepackage[top=0.75in,bottom=0.75in,left=0.75in,right=0.75in]{geometry}
+\usepackage{color}
+\usepackage[
+  colorlinks=false, 
+  pdfborder={0,0,0}, 
+  pdfauthor={Shizun Ge}, 
+  pdftitle={Shizun Ge's resume \today},
+  pdfsubject={resume},
+  pdfkeywords={shizun resume software FPGA},
+]{hyperref}
+%\usepackage{flowfram} % Required for the multi-column layout
+%\usepackage[utf8]{inputenc} % Required for inputting international characters
+%http://bbs.ctex.org/forum.php?mod=viewthread&tid=43596
+%\usepackage{mathpazo}
+%\usepackage[garamond]{mathdesign}
+%\usepackage{charter}
+%\usepackage{fourier}
+%\usepackage{times}
+\usepackage{enumitem} % Required for modifying lists
+\setlist{noitemsep,nolistsep,leftmargin=*} % Remove spacing within and around lists
+\usepackage[dvipsnames]{xcolor} % for \colorbox
+\usepackage[most]{tcolorbox} % for \begin{tcolorbox}
+\usepackage{soul} % enable \hl{my text} for highlight
+%\usepackage[document]{ragged2e} %left aligned
+\usepackage{marvosym} % symbols like phone email
+\usepackage{anyfontsize}
+
+% !TEX TS-program = XeLaTeX
+% \setsansfont{Source Sans Pro}
+% Latex
+% \usepackage[default]{sourcesanpro}
+% \usepackage[T1]{fontenc}
+
+\newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+\usepackage{fontspec}
+\setmainfont{SourceSansPro}[
+Path = \sourcesanspropath,
+UprightFont = *-ExtraLight,
+ItalicFont  = *-ExtraLightIt,
+BoldFont    = *-Bold,
+BoldItalicFont  = *-BoldIt,
+]
+\newfontface\lt{SourceSansPro-Light}[Path=\sourcesanspropath,]
+\newfontface\rg{SourceSansPro-Regular}[Path=\sourcesanspropath,]
+\newfontface\kw{SourceSansPro-Bold}[Path=\sourcesanspropath,]
+
+% keyword
+%\newcommand{\kw}[1]{{\bf{#1}}}
+
+\definecolor{googleblue050}{HTML}{E8F0FE}
+\definecolor{googleblue100}{HTML}{D2E3FC}
+\definecolor{googleblue200}{HTML}{AECBFA}
+\definecolor{googleblue300}{HTML}{8AB4F8}
+\definecolor{googleblue400}{HTML}{669DF6}
+\definecolor{googleblue500}{HTML}{4285F4}
+\definecolor{googleblue600}{HTML}{1A73E8}
+\definecolor{googleblue700}{HTML}{1967D2}
+\definecolor{googleblue800}{HTML}{185ABC}
+\definecolor{googleblue900}{HTML}{174EA6}
+\definecolor{googlered050}{HTML}{FCE8E6}
+\definecolor{googlered100}{HTML}{FAD2CF}
+\definecolor{googlered200}{HTML}{F6AEA9}
+\definecolor{googlered300}{HTML}{F28B82}
+\definecolor{googlered400}{HTML}{EE675C}
+\definecolor{googlered500}{HTML}{EA4335}
+\definecolor{googlered600}{HTML}{D93025}
+\definecolor{googlered700}{HTML}{C5221F}
+\definecolor{googlered800}{HTML}{B31412}
+\definecolor{googlered900}{HTML}{A50E0E}
+\definecolor{googleyellow050}{HTML}{FEF7E0}
+\definecolor{googleyellow100}{HTML}{FEEFC3}
+\definecolor{googleyellow200}{HTML}{FDE293}
+\definecolor{googleyellow300}{HTML}{FDD663}
+\definecolor{googleyellow400}{HTML}{FCC934}
+\definecolor{googleyellow500}{HTML}{FBBC04}
+\definecolor{googleyellow600}{HTML}{F9AB00}
+\definecolor{googleyellow700}{HTML}{F29900}
+\definecolor{googleyellow800}{HTML}{EA8600}
+\definecolor{googleyellow900}{HTML}{E37400}
+\definecolor{googlegreen050}{HTML}{E6F4EA}
+\definecolor{googlegreen100}{HTML}{CEEAD6}
+\definecolor{googlegreen200}{HTML}{A8DAB5}
+\definecolor{googlegreen300}{HTML}{81C995}
+\definecolor{googlegreen400}{HTML}{5BB974}
+\definecolor{googlegreen500}{HTML}{34A853}
+\definecolor{googlegreen600}{HTML}{1E8E3E}
+\definecolor{googlegreen700}{HTML}{188038}
+\definecolor{googlegreen800}{HTML}{137333}
+\definecolor{googlegreen900}{HTML}{0D652D}
+
+\newcommand{\tcbcolumns}[1]{
+  \begin{tcbitemize}
+  [
+    colframe=white, colback=white, arc=0pt, boxrule=0pt
+    raster columns={#1}, raster force size=false,
+    raster valign=top, raster column skip=0.5em,
+    raster left skip=0pt, raster right skip=0pt,
+    raster before skip=0pt, raster after skip=0pt,
+    before=0pt, before skip=0pt,
+    left=0pt, grow to left by=0pt,
+    right=0pt, grow to right by=0pt,
+    after=0pt, after skip=0pt,
+    boxsep=0pt,
+    top=0pt, toprule=0pt,
+    left=0pt, leftrule=0pt,
+    right=0pt, rightrule=0pt,
+    bottom=0pt, bottomrule=0pt,
+  ]
+}
+
+% header
+\newcommand{\headertitle}[3]{
+  \begin{tcolorbox}[
+      enhanced jigsaw, 
+      colback=white, colframe=white,
+      colbacktitle=white, coltitle=black,
+      colbacktitle=googleblue900, coltitle=white,
+      colbacktitle=white, coltitle=black,
+      boxrule=0pt, arc=0pt, boxsep=0pt,
+      toptitle=5pt, bottomtitle=5pt, titlerule=0pt, 
+      before=0pt, before skip=0pt,
+      left skip=0pt, grow to left by=0pt,
+      right skip=0pt, grow to right by=0pt,
+      after=0pt, after skip=0pt,
+      top=5pt, toprule=0pt,
+      left=5pt, leftrule=0pt,
+      right=5pt, rightrule=0pt,
+      bottom=5pt, bottomrule=0pt,
+      {#1}, title={#2},
+  ]
+    {#3}
+  \end{tcolorbox}
+}
+
+\newcommand{\headerright}[2]{
+  \headertitle{flushleft title}{\bf\LARGE\textsc{#1}}{
+    %\begin{flushleft}
+      {#2}
+    %\end{flushleft}
+  }
+}
+
+\newcommand{\headerleft}[2]{
+  \headertitle{flushright title}{\bf\large\textsc{#1}}{
+    \begin{flushright}
+      {#2}
+    \end{flushright}
+  }
+}
+
+\newcommand{\rightcolumntwoboxes}[2]{
+  \tcbcolumns{2}
+    \tcbitem[add to width=-0.322\textwidth]
+      \begin{flushleft}
+        {#1}
+      \end{flushleft}
+    \tcbitem[add to width=+0.322\textwidth]
+      \begin{flushleft}
+        {#2}
+      \end{flushleft}
+  \end{tcbitemize}
+}
+
+% position; start time; end time;
+% employer; location; details;
+\newcommand{\job}[6]{
+  \rightcolumntwoboxes{
+    {#2}-{#3}
+  }{
+    {\bf {#1}}\\
+    {{#4}},\ {\it {#5}}
+    {#6}
+    \vspace{0.5em}
+  }
+}
+
+% degree; area/major; time; school; location;
+\newcommand{\education}[5]{
+  \rightcolumntwoboxes{
+    {#3}
+  }{
+    {\bf {#1}} {#2}\\
+    {{#4}},\ {\it {#5}}
+    \vspace{0.5em}
+  }
+}
+
+% categories; items
+\newcommand{\skills}[2]{
+  {\bf{#1}}\\
+  {#2}
+}
+
+\newcommand{\rb}[1]{
+  {#1} \textbullet\\
+}
+
+\begin{document}
+\thispagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%
+% HEADER
+%%%%%%%%%%%%%%%%%%%%
+%\centerline{{\Huge\bf{Shizun Ge}}} % fontsize for Huge is 24.88
+\centerline{{\fontsize{35}{60}\selectfont \rg{Shizun Ge}}}
+\vspace{2em}
+%%%%%%%%%%%%%%%%%%%%
+% Begin columns
+%%%%%%%%%%%%%%%%%%%%
+\tcbcolumns{2}
+%%%%%%%%%%%%%%%%%%%%
+% First column
+%%%%%%%%%%%%%%%%%%%%
+\tcbitem[add to width=-0.30\textwidth]
+
+  \headerleft{Contact}{
+    +1-857-891-7998\\
+    \href{mailto:shizunge@gmail.com}{shizunge@gmail.com}\\
+  }
+
+  \headerleft{Skills}{
+    \skills{Software}{
+      C++\\
+      C\\
+      Go\\
+      Tcl\\
+      Python\\
+      Matlab\\
+      CUDA\\
+      Embedded\\
+      Linux device driver\\
+      OpenCV\\
+      OpenGL\\
+    }
+    \vspace{0.5em}
+    \skills{FPGA}{
+      Verilog\\
+      SystemVerilog\\
+      Static Timing Analysis\\
+      FPGA-based prototyping\\
+      Protocompiler\\
+      Certify\\
+      Synplify\\
+      Identify\\
+      VCS-MX\\
+      Verdi\\
+      Xilinx Vivado\\
+      Intel Quartus Prime\\
+    }
+  }
+
+  \headerleft{Recent coursework}{
+    \rb{IO Concepts and Protocols: PCI Express, Ethernet, and Fibre Channel}
+    \rb{Jitter Essentials}
+    \rb{Linux Device Drivers, Advanced}
+    \rb{Linux Performance in the Cloud and Data Center}
+    %\rb{Linux System Performance in the Cloud and Data Center}
+    \rb{System Virtualization Fundamentals}
+    %\rb{Advanced Verification with SystemVerilog OOP Testbench} 
+    \rb{SystemVerilog OOP Testbench} 
+    \rb{SystemVerilog Assertions and Formal Verification}
+  }
+
+%%%%%%%%%%%%%%%%%%%%
+% Second column
+%%%%%%%%%%%%%%%%%%%%
+\tcbitem[add to width=+0.30\textwidth]
+
+  \headerright{Career summary}{
+    \begin{flushleft}
+    \begin{itemize}
+      \item {\kw Software} developer with work experience in object oriented programming, GPU programming and scripting.
+      \item {\kw FPGA RTL} developer with work experience in all aspects of FPGA implementation, including design partitioning, synthesis, place and route, timing analysis, IP integration, verification and bringup.
+    \end{itemize}
+    \end{flushleft}
+  } % Career summary
+
+  \headerright{Experience}{
+    \job{Software Engineer}{9/2018}{Present}{Google LLC}{Sunnyvale, CA}{
+      \begin{itemize}
+        \item Developed a reference model for the next generation TPU using {\kw C++}
+	\item Designed and developed a co-simulation framework for FPGA products using {\kw C++} and {\kw SystemVerilog}
+	\item Developed tools and test cases for hardware diagnostics in the platform infrastructure team, using {\kw Go}, {\kw C++} and {\kw Python}
+      \end{itemize}
+    }
+
+    \job{R\&D Engineer, Staff}{8/2013}{9/2018}{Synopsys, Inc.}{Mountain View, CA}{
+      \begin{itemize}
+        \item Designed and implemented software and hardware integration features using {\kw C++}, {\kw Verilog}, and {\kw scripting}
+        \item Led projects of distinguishing technology HSTDM of HAPS prototyping system, resulting in full adoption of HSTDM and success at customer sites
+          \begin{itemize}
+            \item Designed and implemented time-division multiplexing (TDM) IP in {\kw Verilog} based on Xilinx Select IO on {\kw Xilinx Virtex7} and {\kw Ultrascale} platform
+            \item Optimized the IP to achieve 2.4Gbps over a signle-ended channel between two FPGAs, which is the maximum bitrate supported by the hardware
+            \item Developed an IP insertion flow using {\kw C++} and {\kw C}
+            \item Developed various {\kw Tcl} {\kw scripts} helping internal and external customers develop, debug, bringup and monitor FPGA prototyping system
+          \end{itemize}
+        \item Implemented a runtime software framework and IPs for SystemVerilog direct programming interface (DPI), using {\kw C++} and {\kw Verilog}
+        \item Coordinated multiple teams cross geographical coordinations, including software team, firmware team, hardware team, and testing team, as well as external vendors and customers
+      \end{itemize}
+    }
+
+    \job{Software Engineer}{10/2012}{8/2013}{Minor Studios Interactive LLC}{Los Angeles, CA}{
+      \begin{itemize}
+        \item Developed real time high-definition video processing program using {\kw C++}, {\kw CUDA}, {\kw OpenCV}, and {\kw OpenGL}
+      \end{itemize}
+    }
+    
+    \job{Research Assistant}{9/2011}{9/2012}{Boston University}{Boston, MA}{
+      \begin{itemize}
+        \item Developed error control codes algorithm to prevent side-channel attacks, modeling in {\kw C} and {\kw Matlab}, implementing in {\kw Verilog} and {\kw Cadence Encounter}
+      \end{itemize}
+    }
+  } % Experience
+
+  \headerright{Education}{
+    \education{Certificate}{Embedded Systems}{5/2019}
+      {UCSC Silicon Valley Extension}{Santa Clara, CA}
+    \education{Master of Science}{in Computer Engineering}{9/2012}
+      {Boston University College of Engineering}{Boston, MA}
+    \education{Bachelor of Engineering}{in Electronic Engineering}{5/2010}
+      {The Chinese University of Hong Kong}{Hong Kong SAR}
+  } % Education
+
+%%%%%%%%%%%%%%%%%%%%
+% End columns
+%%%%%%%%%%%%%%%%%%%%
+\end{tcbitemize}
+
+\end{document}
