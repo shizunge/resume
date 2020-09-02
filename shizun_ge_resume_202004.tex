@@ -1,7 +1,4 @@
 % use xelatex
-% To install the font:
-% sudo add-apt-repository ppa:texlive-backports/ppa
-% sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
 \documentclass[10pt,letter]{article}
 \usepackage[top=0.75in,bottom=0.75in,left=0.75in,right=0.75in]{geometry}
 \usepackage{color}
@@ -29,25 +26,40 @@
 %\usepackage[document]{ragged2e} %left aligned
 \usepackage{marvosym} % symbols like phone email
 \usepackage{anyfontsize}
+\usepackage{fontspec}
 
 % !TEX TS-program = XeLaTeX
-% \setsansfont{Source Sans Pro}
+% \setsansfont{SourceSansPro}
 % Latex
 % \usepackage[default]{sourcesanpro}
 % \usepackage[T1]{fontenc}
 
-\newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
-\usepackage{fontspec}
-\setmainfont{SourceSansPro}[
-Path = \sourcesanspropath,
-UprightFont = *-ExtraLight,
-ItalicFont  = *-ExtraLightIt,
-BoldFont    = *-Bold,
-BoldItalicFont  = *-BoldIt,
+% Install font manually on Unbuntu:
+% To install the font:
+% sudo add-apt-repository ppa:texlive-backports/ppa
+% sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
+% \newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+% \setmainfont{SourceSansPro}[
+% Path = \sourcesanspropath,
+% UprightFont = *-ExtraLight,
+% ItalicFont  = *-ExtraLightIt,
+% BoldFont    = *-Bold,
+% BoldItalicFont  = *-BoldIt,
+% ]
+% \newfontface\lt{SourceSansPro-Light}[Path=\sourcesanspropath,]
+% \newfontface\rg{SourceSansPro-Regular}[Path=\sourcesanspropath,]
+% \newfontface\kw{SourceSansPro-Bold}[Path=\sourcesanspropath,]
+
+\setsansfont{Source Sans Pro}
+\newfontface\lt{Source Sans Pro Light}[]
+\newfontface\rg{Source Sans Pro}[]
+\newfontface\kw{Source Sans Pro Bold}[]
+\setmainfont{Source Sans Pro}[
+	UprightFont = {* ExtraLight},
+	ItalicFont  = {* ExtraLight Italic},
+	BoldFont    = {* Bold},
+	BoldItalicFont  = {* Bold Italic},
 ]
-\newfontface\lt{SourceSansPro-Light}[Path=\sourcesanspropath,]
-\newfontface\rg{SourceSansPro-Regular}[Path=\sourcesanspropath,]
-\newfontface\kw{SourceSansPro-Bold}[Path=\sourcesanspropath,]
 
 % keyword
 %\newcommand{\kw}[1]{{\bf{#1}}}
