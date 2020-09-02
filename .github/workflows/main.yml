@@ -4,24 +4,28 @@ name: Build PDF
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+on: push
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2.1.1
+        with:
+          # A list of files, directories, and wildcard patterns to cache and restore
+          path: .*
+          # An explicit key for restoring and saving the cache
+          key: cache
+          # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
+          # restore-keys: # optional
       - name: Github Action for LaTeX
         # You may pin to the exact commit or the version.
         # uses: xu-cheng/latex-action@dacf2cfbdd5fd768c2298cbdc9e105bd9ed7f293
@@ -30,7 +34,7 @@ jobs:
           # The root LaTeX file to be compiled
           root_file: shizun_ge_resume_202004.tex
           # The working directory for the LaTeX engine
-          working_directory: output
+          working_directory: ./output
           # The LaTeX engine to be invoked
           # compiler: # optional, default is latexmk
           # Extra arguments to be passed to the LaTeX engine
@@ -48,14 +52,4 @@ jobs:
           # Instruct latexmk to use LuaLaTeX
           # latexmk_use_lualatex: # optional
           # Instruct latexmk to use XeLaTeX
-          latexmk_use_xelatex: # optional
-
-      - name: Cache
-        uses: actions/cache@v2.1.1
-        with:
-          # A list of files, directories, and wildcard patterns to cache and restore
-          path: .*
-          # An explicit key for restoring and saving the cache
-          key: cache
-          # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
-          # restore-keys: # optional
+          latexmk_use_xelatex: yes # optional
