@@ -34,7 +34,7 @@ jobs:
           # The root LaTeX file to be compiled
           root_file: shizun_ge_resume_202004.tex
           # The working directory for the LaTeX engine
-          working_directory: ./output
+          # working_directory:
           # The LaTeX engine to be invoked
           # compiler: # optional, default is latexmk
           # Extra arguments to be passed to the LaTeX engine
@@ -52,4 +52,4 @@ jobs:
           # Instruct latexmk to use LuaLaTeX
           # latexmk_use_lualatex: # optional
           # Instruct latexmk to use XeLaTeX
-          latexmk_use_xelatex: yes # optional
+          latexmk_use_xelatex: true # optional
