@@ -27,6 +27,8 @@
 \usepackage{marvosym} % symbols like phone email
 \usepackage{anyfontsize}
 \usepackage{fontspec}
+% \usepackage{sourcesanspro}
+% \usepackage[T1]{fontenc}
 
 % !TEX TS-program = XeLaTeX
 % \setsansfont{SourceSansPro}
@@ -34,35 +36,38 @@
 % \usepackage[default]{sourcesanpro}
 % \usepackage[T1]{fontenc}
 
-% Install font manually on Unbuntu:
-% To install the font:
+% To install the font on Unbuntu:
 % sudo add-apt-repository ppa:texlive-backports/ppa
 % sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
+% To install the font on Alpine
+% apk add texmf-dist-fontsextra
 % \newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
-% \setmainfont{SourceSansPro}[
-% Path = \sourcesanspropath,
-% UprightFont = *-ExtraLight,
-% ItalicFont  = *-ExtraLightIt,
-% BoldFont    = *-Bold,
-% BoldItalicFont  = *-BoldIt,
-% ]
-% \newfontface\lt{SourceSansPro-Light}[Path=\sourcesanspropath,]
-% \newfontface\rg{SourceSansPro-Regular}[Path=\sourcesanspropath,]
-% \newfontface\kw{SourceSansPro-Bold}[Path=\sourcesanspropath,]
-
-\setsansfont{Source Sans Pro}
-\newfontface\lt{SourceSansPro-Light}[]
-\newfontface\rg{SourceSansPro-Regular}[]
-\newfontface\kw{SourceSansPro-Bold}[]
-\setmainfont{Source Sans Pro}[
-	UprightFont = {* ExtraLight},
-	ItalicFont  = {* ExtraLight Italic},
-	BoldFont    = {* Bold},
-	BoldItalicFont  = {* Bold Italic},
+\newcommand{\sourcesanspropath}{/opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+\setmainfont{SourceSansPro}[
+Path = \sourcesanspropath,
+UprightFont = *-ExtraLight,
+ItalicFont  = *-ExtraLightIt,
+BoldFont    = *-Bold,
+BoldItalicFont  = *-BoldIt,
 ]
+\newfontface\lt{SourceSansPro-Light}[Path=\sourcesanspropath,]
+\newfontface\rg{SourceSansPro-Regular}[Path=\sourcesanspropath,]
+\newfontface\kw{SourceSansPro-Bold}[Path=\sourcesanspropath,]
+
+% \setsansfont{Source Sans Pro}
+% \setmainfont{Source Sans Pro}[
+% 	UprightFont = {* ExtraLight},
+% 	ItalicFont  = {* ExtraLight Italic},
+% 	BoldFont    = {* Bold},
+% 	BoldItalicFont  = {* Bold Italic},
+% ]
+% \newfontface\lt{Source Sans Pro Light}[]
+% \newfontface\rg{Source Sans Pro}[]
+% \newfontface\kw{Source Sans Pro Bold}[]
 
 % keyword
 %\newcommand{\kw}[1]{{\bf{#1}}}
+%\newcommand{\rg}[1]{{{#1}}}
 
 \definecolor{googleblue050}{HTML}{E8F0FE}
 \definecolor{googleblue100}{HTML}{D2E3FC}
@@ -105,6 +110,7 @@
 \definecolor{googlegreen800}{HTML}{137333}
 \definecolor{googlegreen900}{HTML}{0D652D}
 
+% create columes
 \newcommand{\tcbcolumns}[1]{
   \begin{tcbitemize}
   [
@@ -149,6 +155,7 @@
   \end{tcolorbox}
 }
 
+% header on the right column
 \newcommand{\headerright}[2]{
   \headertitle{flushleft title}{\bf\LARGE\textsc{#1}}{
     %\begin{flushleft}
@@ -157,6 +164,7 @@
   }
 }
 
+% header on the left column
 \newcommand{\headerleft}[2]{
   \headertitle{flushright title}{\bf\large\textsc{#1}}{
     \begin{flushright}
@@ -165,6 +173,7 @@
   }
 }
 
+% create two sub-columns in the right column
 \newcommand{\rightcolumntwoboxes}[2]{
   \tcbcolumns{2}
     \tcbitem[add to width=-0.322\textwidth]
@@ -178,6 +187,7 @@
   \end{tcbitemize}
 }
 
+% define jobs
 % position; start time; end time;
 % employer; location; details;
 \newcommand{\job}[6]{
@@ -191,6 +201,7 @@
   }
 }
 
+% define schools
 % degree; area/major; time; school; location;
 \newcommand{\education}[5]{
   \rightcolumntwoboxes{
@@ -202,12 +213,14 @@
   }
 }
 
+% define skills
 % categories; items
 \newcommand{\skills}[2]{
   {\bf{#1}}\\
   {#2}
 }
 
+% add bullet to the right
 \newcommand{\rb}[1]{
   {#1} \textbullet\\
 }
