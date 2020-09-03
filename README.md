@@ -1,1 +1,2 @@
-# Shizun's one page resume
+# Shizun Ge's resume
+Copyright 2020 Shizun Ge
