@@ -1,10 +1,10 @@
 # This is a basic workflow to help you get started with Actions
-
 name: Build PDF
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on: push
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -32,7 +32,7 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           # The root LaTeX file to be compiled
-          root_file: shizun_ge_resume_202004.tex
+          root_file: shizun_ge_resume.tex
           # The working directory for the LaTeX engine
           # working_directory:
           # The LaTeX engine to be invoked
@@ -56,4 +56,4 @@ jobs:
       - name: Upload PDF
         uses: actions/upload-artifact@v2
         with:
-          path: shizun_ge_resume_202004.pdf
+          path: *.pdf
