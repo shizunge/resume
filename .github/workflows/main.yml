@@ -57,4 +57,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: shizun_ge_resume
-          path: *.pdf
+          path: shizun_ge_resume.pdf
