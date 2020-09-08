@@ -1,8 +1,4 @@
 on:
-  push:
-    # Sequence of patterns matched against refs/tags
-    tags:
-    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
   release:
     types: # This configuration does not affect the page_build event above
       - created
@@ -14,6 +10,11 @@ jobs:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Github Action for LaTeX
@@ -43,23 +44,13 @@ jobs:
           # latexmk_use_lualatex: # optional
           # Instruct latexmk to use XeLaTeX
           latexmk_use_xelatex: true # optional
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
       - name: Upload Release Asset
-        id: upload-release-asset 
+        id: upload-release-asset  steps.create_release.outputs.upload_url
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: shizun_ge_resume.pdf
           asset_name: shizun_ge_resume
           asset_content_type: application/pdf
