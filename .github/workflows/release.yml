@@ -45,7 +45,7 @@ jobs:
           # Instruct latexmk to use XeLaTeX
           latexmk_use_xelatex: true # optional
       - name: Upload Release Asset
-        id: upload-release-asset  steps.create_release.outputs.upload_url
+        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
