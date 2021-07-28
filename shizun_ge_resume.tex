@@ -41,8 +41,10 @@
 % sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
 % To install the font on Alpine
 % apk add texmf-dist-fontsextra
-\newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
-% \newcommand{\sourcesanspropath}{/opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+% Path used locally
+% \newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+% Path used by github action
+\newcommand{\sourcesanspropath}{/opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
 \setmainfont{SourceSansPro}[
 Path = \sourcesanspropath,
 UprightFont = *-ExtraLight,
