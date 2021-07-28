@@ -41,8 +41,8 @@
 % sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
 % To install the font on Alpine
 % apk add texmf-dist-fontsextra
-% \newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
-\newcommand{\sourcesanspropath}{/opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+\newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+% \newcommand{\sourcesanspropath}{/opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
 \setmainfont{SourceSansPro}[
 Path = \sourcesanspropath,
 UprightFont = *-ExtraLight,
@@ -258,6 +258,7 @@ BoldItalicFont  = *-BoldIt,
       CUDA\\
       Embedded\\
       Linux device driver\\
+      Docker\\
       OpenCV\\
       OpenGL\\
     }
@@ -308,6 +309,7 @@ BoldItalicFont  = *-BoldIt,
     \job{Software Engineer}{9/2018}{Present}{Google LLC}{Sunnyvale, CA}{
       \begin{itemize}
         \item Developed a reference model for the next generation TPU using {\kw C++}
+        \item Scoped and planned tasks of the reference model
 	\item Designed and developed a co-simulation framework for FPGA products using {\kw C++} and {\kw SystemVerilog}
 	\item Developed tools and test cases for hardware diagnostics in the platform infrastructure team, using {\kw Go}, {\kw C++} and {\kw Python}
       \end{itemize}
@@ -319,7 +321,7 @@ BoldItalicFont  = *-BoldIt,
         \item Led projects of distinguishing technology HSTDM of HAPS prototyping system, resulting in full adoption of HSTDM and success at customer sites
           \begin{itemize}
             \item Designed and implemented time-division multiplexing (TDM) IP in {\kw Verilog} based on Xilinx Select IO on {\kw Xilinx Virtex7} and {\kw Ultrascale} platform
-            \item Optimized the IP to achieve 2.4Gbps over a signle-ended channel between two FPGAs, which is the maximum bitrate supported by the hardware
+            \item Optimized the IP to achieve the maximum bitrate between two FPGAs
             \item Developed an IP insertion flow using {\kw C++} and {\kw C}
             \item Developed various {\kw Tcl} {\kw scripts} helping internal and external customers develop, debug, bringup and monitor FPGA prototyping system
           \end{itemize}
