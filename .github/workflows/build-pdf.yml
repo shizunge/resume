@@ -32,7 +32,7 @@ jobs:
       - name: Github Action for LaTeX
         # You may pin to the exact commit or the version.
         # uses: xu-cheng/latex-action@dacf2cfbdd5fd768c2298cbdc9e105bd9ed7f293
-        uses: xu-cheng/latex-action@v2
+        uses: xu-cheng/latex-action@v3
         with:
           # The root LaTeX file to be compiled
           root_file: shizun_ge_resume.tex
