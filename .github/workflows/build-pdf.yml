@@ -57,7 +57,7 @@ jobs:
           # Instruct latexmk to use XeLaTeX
           latexmk_use_xelatex: true # optional
       - name: Upload PDF
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: shizun_ge_resume
           path: shizun_ge_resume.pdf
