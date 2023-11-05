@@ -1,14 +1,15 @@
 % use xelatex
 \documentclass[10pt,letter]{article}
-\usepackage[top=0.75in,bottom=0.75in,left=0.5in,right=0.5in]{geometry}
+\usepackage[top=0.75in,bottom=0.75in,left=0.75in,right=0.75in]{geometry}
 \usepackage{color}
 \usepackage[
-  colorlinks=false, 
+  colorlinks=true,
+  urlcolor=black,
   pdfborder={0,0,0}, 
   pdfauthor={Shizun Ge}, 
   pdftitle={Shizun Ge's resume \today},
   pdfsubject={resume},
-  pdfkeywords={shizun resume software FPGA},
+  pdfkeywords={shizun resume software},
 ]{hyperref}
 %\usepackage{flowfram} % Required for the multi-column layout
 %\usepackage[utf8]{inputenc} % Required for inputting international characters
@@ -31,10 +32,6 @@
 % \usepackage[T1]{fontenc}
 
 % !TEX TS-program = XeLaTeX
-% \setsansfont{SourceSansPro}
-% Latex
-% \usepackage[default]{sourcesanpro}
-% \usepackage[T1]{fontenc}
 
 % To install the font on Unbuntu:
 % sudo add-apt-repository ppa:texlive-backports/ppa
@@ -55,21 +52,6 @@ BoldItalicFont  = *-BoldIt,
 \newfontface\lt{SourceSansPro-Light}[Path=\sourcesanspropath,]
 \newfontface\rg{SourceSansPro-Regular}[Path=\sourcesanspropath,]
 \newfontface\kw{SourceSansPro-Bold}[Path=\sourcesanspropath,]
-
-% \setsansfont{Source Sans Pro}
-% \setmainfont{Source Sans Pro}[
-% 	UprightFont = {* ExtraLight},
-% 	ItalicFont  = {* ExtraLight Italic},
-% 	BoldFont    = {* Bold},
-% 	BoldItalicFont  = {* Bold Italic},
-% ]
-% \newfontface\lt{Source Sans Pro Light}[]
-% \newfontface\rg{Source Sans Pro}[]
-% \newfontface\kw{Source Sans Pro Bold}[]
-
-% keyword
-%\newcommand{\kw}[1]{{\bf{#1}}}
-%\newcommand{\rg}[1]{{{#1}}}
 
 \definecolor{googleblue050}{HTML}{E8F0FE}
 \definecolor{googleblue100}{HTML}{D2E3FC}
@@ -111,6 +93,10 @@ BoldItalicFont  = *-BoldIt,
 \definecolor{googlegreen700}{HTML}{188038}
 \definecolor{googlegreen800}{HTML}{137333}
 \definecolor{googlegreen900}{HTML}{0D652D}
+
+% larger number will narrow the left colmun.
+\def\rightColumnWidthAdjust{0.322}
+\def\columnWidthAdjust{0.29}
 
 % create columes
 \newcommand{\tcbcolumns}[1]{
@@ -178,11 +164,11 @@ BoldItalicFont  = *-BoldIt,
 % create two sub-columns in the right column
 \newcommand{\rightcolumntwoboxes}[2]{
   \tcbcolumns{2}
-    \tcbitem[add to width=-0.322\textwidth]
+    \tcbitem[add to width=-\rightColumnWidthAdjust\textwidth]
       \begin{flushleft}
         {#1}
       \end{flushleft}
-    \tcbitem[add to width=+0.322\textwidth]
+    \tcbitem[add to width=+\rightColumnWidthAdjust\textwidth]
       \begin{flushleft}
         {#2}
       \end{flushleft}
@@ -242,11 +228,12 @@ BoldItalicFont  = *-BoldIt,
 %%%%%%%%%%%%%%%%%%%%
 % First column
 %%%%%%%%%%%%%%%%%%%%
-\tcbitem[add to width=-0.30\textwidth]
+\tcbitem[add to width=-\columnWidthAdjust\textwidth]
 
   \headerleft{Contact}{
     +1-857-891-7998\\
-    \href{mailto:shizunge@gmail.com}{shizunge@gmail.com}\\
+    \href{mailto:resume@shizunge.com}{resume@shizunge.com}\\
+    \href{https://github.com/shizunge}{github.com/shizunge}\\
   }
 
   \headerleft{Skills}{
@@ -254,15 +241,12 @@ BoldItalicFont  = *-BoldIt,
       C++\\
       C\\
       Go\\
+      Bash\\
+      Docker\\
       Tcl\\
       Python\\
-      Matlab\\
-      CUDA\\
       Embedded\\
       Linux device driver\\
-      Docker\\
-      OpenCV\\
-      OpenGL\\
     }
     \vspace{0.5em}
     \skills{FPGA}{
@@ -271,81 +255,78 @@ BoldItalicFont  = *-BoldIt,
       Static Timing Analysis\\
       FPGA-based prototyping\\
       Protocompiler\\
-      Certify\\
       Synplify\\
-      Identify\\
       VCS-MX\\
       Verdi\\
       Xilinx Vivado\\
-      Intel Quartus Prime\\
     }
   }
 
   \headerleft{Recent coursework}{
+    \rb{Effective Leadership and Management}
     \rb{IO Concepts and Protocols: PCI Express, Ethernet, and Fibre Channel}
-    \rb{Jitter Essentials}
     \rb{Linux Device Drivers, Advanced}
     \rb{Linux Performance in the Cloud and Data Center}
-    %\rb{Linux System Performance in the Cloud and Data Center}
     \rb{System Virtualization Fundamentals}
-    %\rb{Advanced Verification with SystemVerilog OOP Testbench} 
-    \rb{SystemVerilog OOP Testbench} 
-    \rb{SystemVerilog Assertions and Formal Verification}
   }
 
 %%%%%%%%%%%%%%%%%%%%
 % Second column
 %%%%%%%%%%%%%%%%%%%%
-\tcbitem[add to width=+0.30\textwidth]
+\tcbitem[add to width=+\columnWidthAdjust\textwidth]
 
   \headerright{Career summary}{
     \begin{flushleft}
     \begin{itemize}
-      \item {\kw Software} developer with work experience in object oriented programming, GPU programming and scripting.
-      \item {\kw FPGA RTL} developer with work experience in all aspects of FPGA implementation, including design partitioning, synthesis, place and route, timing analysis, IP integration, verification and bringup.
+      \item Experienced {\kw software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
     \end{itemize}
     \end{flushleft}
   } % Career summary
 
   \headerright{Experience}{
-    \job{Software Engineer}{9/2018}{Present}{Google LLC}{Sunnyvale, CA}{
+    \job{Senior Software Engineer}{9/2018}{Present}{Google}{Sunnyvale, CA}{
       \begin{itemize}
-        \item Led developing a reference model for the next generation TPU
-		\item Scoped, planned, and executed tasks of the reference model, developed the model using {\kw C++}
-	    \item Designed and developed a co-simulation framework for FPGA products using {\kw C++} and {\kw SystemVerilog}
-	    \item Developed tools and test cases for hardware diagnostics in the platform infrastructure team, using {\kw Go}, {\kw C++} and {\kw Python}
+        \item Led a software team developing simulators for the next generation TPU, while being a solid individual contributor proficient in {\kw C++}
+        \begin{itemize}
+          \item Scoped, planned, delegated and executed tasks
+          \item Collaborated with multiple hardware and software teams, prioritizing tasks, and delivering features on time to unblock tape-out
+          \item Defined a roadmap and provided insights for improved architecture
+          \item Mentored and tutored new hires and junior team members
+        \end{itemize}
+        \item Designed and developed a co-simulation framework for a FPGA product using {\kw C++} and {\kw SystemVerilog}
+        \item Developed tools and test cases for hardware diagnostics in the platform infrastructure team, using {\kw Go}, {\kw C++} and {\kw Python}
       \end{itemize}
     }
 
-    \job{R\&D Engineer, Staff}{8/2013}{9/2018}{Synopsys, Inc.}{Mountain View, CA}{
+    \job{Staff R\&D Engineer}{8/2013}{9/2018}{Synopsys}{Mountain View, CA}{
       \begin{itemize}
-        \item Designed and implemented software and hardware integration features using {\kw C++}, {\kw Verilog}, and {\kw scripting}
         \item Led projects of distinguishing technology HSTDM of HAPS prototyping system, resulting in full adoption of HSTDM and success at customer sites
-          \begin{itemize}
-            \item Designed and implemented time-division multiplexing (TDM) IP in {\kw Verilog} based on Xilinx Select IO on {\kw Xilinx Virtex7} and {\kw Ultrascale} platform
-            \item Optimized the IP to achieve the maximum bitrate between two FPGAs
-            \item Developed an IP insertion flow using {\kw C++} and {\kw C}
-            \item Developed various {\kw Tcl} {\kw scripts} helping internal and external customers develop, debug, bringup and monitor FPGA prototyping system
-          \end{itemize}
-        \item Implemented a runtime software framework and IPs for SystemVerilog direct programming interface (DPI), using {\kw C++} and {\kw Verilog}
-        \item Coordinated multiple teams cross geographical coordinations, including software team, firmware team, hardware team, and testing team, as well as external vendors and customers
+        \begin{itemize}
+          \item Designed and implemented time-division multiplexing (TDM) IP in {\kw Verilog} based on Xilinx Select IO on {\kw Xilinx Virtex7} and {\kw Ultrascale} platform
+          \item Developed an IP insertion software flow using {\kw C++} and {\kw C}
+          \item Developed various {\kw Tcl} {\kw scripts} helping internal and external customers develop, debug, bringup and monitor FPGA prototyping system
+        \end{itemize}
+        \item Designed and implemented a runtime software framework and IPs for SystemVerilog DPI on HAPS, using {\kw C++} and {\kw Verilog}
+        \item Coordinated multiple teams cross geographical coordinations, including software, firmware, hardware, testing, vendors and customers
       \end{itemize}
     }
 
     \job{Software Engineer}{10/2012}{8/2013}{Minor Studios Interactive LLC}{Los Angeles, CA}{
       \begin{itemize}
-        \item Developed real time high-definition video processing program using {\kw C++}, {\kw CUDA}, {\kw OpenCV}, and {\kw OpenGL}
+        \item Developed real time HD video processing programs on GPU
       \end{itemize}
     }
     
     \job{Research Assistant}{9/2011}{9/2012}{Boston University}{Boston, MA}{
-	  \begin{itemize}
-        \item Developed error control codes algorithm to prevent side-channel attacks, modeling in {\kw C} and {\kw Matlab}, implementing in {\kw Verilog} and {\kw Cadence Encounter}
+      \begin{itemize}
+        \item Developed error control codes algorithm to prevent side-channel attacks
       \end{itemize}
     }
   } % Experience
 
   \headerright{Education}{
+    \education{Certificate}{Leadership and Management}{2025 (Expected)}
+      {UC Berkely Extension}{Online}
     \education{Certificate}{Embedded Systems}{5/2019}
       {UCSC Silicon Valley Extension}{Santa Clara, CA}
     \education{Master of Science}{in Computer Engineering}{9/2012}
