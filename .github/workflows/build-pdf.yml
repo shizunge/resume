@@ -5,15 +5,14 @@ name: Build PDF
 # events but only for the master branch
 on: 
   push:
-    branches:
-      - master
+    paths:
+    - shizun_ge_resume.tex
   workflow_dispatch:
         
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
-    if: "contains(github.event.head_commit.message, '[build pdf]')"
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
