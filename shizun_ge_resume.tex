@@ -1,6 +1,6 @@
 % use xelatex
 \documentclass[10pt,letter]{article}
-\usepackage[top=0.75in,bottom=0.75in,left=0.75in,right=0.75in]{geometry}
+\usepackage[top=0.7in,bottom=0.7in,left=0.7in,right=0.7in]{geometry}
 \usepackage{color}
 \usepackage[
   colorlinks=true,
@@ -8,8 +8,13 @@
   pdfborder={0,0,0}, 
   pdfauthor={Shizun Ge}, 
   pdftitle={Shizun Ge's resume \today},
-  pdfsubject={resume},
-  pdfkeywords={shizun resume software},
+  pdfsubject={Shizun Ge's resume targeting staff software engineer},
+  pdfkeywords={resume, software, staff software engineer, 
+               AI Infrastructure, AI accelerator, hardware acceleration, TPU, Tensor Processing Unit, data center, infrastructure,
+               simulation, emulation, EDA, electronic design automation, verification, validation,
+               c++, go, golang, bash, docker, embedded systems, firmware, FPGA, SystemVerilog, Hardware/Software Codesign, 
+               technical leadership, cross-functional collaboration, system architecture, technical strategy, engineering excellence,
+               \today},
 ]{hyperref}
 %\usepackage{flowfram} % Required for the multi-column layout
 %\usepackage[utf8]{inputenc} % Required for inputting international characters
@@ -95,7 +100,7 @@ BoldItalicFont  = *-BoldIt,
 \definecolor{googlegreen900}{HTML}{0D652D}
 
 % larger number will narrow the left colmun.
-\def\rightColumnWidthAdjust{0.322}
+\def\rightColumnWidthAdjust{0.39}
 \def\columnWidthAdjust{0.29}
 
 % create columes
@@ -150,6 +155,7 @@ BoldItalicFont  = *-BoldIt,
       {#2}
     %\end{flushleft}
   }
+  \vspace{-0.5em}
 }
 
 % header on the left column
@@ -159,6 +165,7 @@ BoldItalicFont  = *-BoldIt,
       {#2}
     \end{flushright}
   }
+  \vspace{-0.5em}
 }
 
 % create two sub-columns in the right column
@@ -180,7 +187,7 @@ BoldItalicFont  = *-BoldIt,
 % employer; location; details;
 \newcommand{\job}[6]{
   \rightcolumntwoboxes{
-    {#2}-{#3}
+    {#2}\\{#3}
   }{
     {\bf {#1}}\\
     {{#4}},\ {\it {#5}}
@@ -200,12 +207,18 @@ BoldItalicFont  = *-BoldIt,
     \vspace{0.5em}
   }
 }
+% degree; area/major; time; school; location;
+\newcommand{\educationleft}[5]{
+  {\bf {#1}}\\{#2}\\{{#4}}\\
+  \vspace{0.5em}
+}
 
 % define skills
 % categories; items
 \newcommand{\skills}[2]{
   {\bf{#1}}\\
   {#2}
+  \vspace{0.5em}
 }
 
 % add bullet to the right
@@ -219,8 +232,21 @@ BoldItalicFont  = *-BoldIt,
 % HEADER
 %%%%%%%%%%%%%%%%%%%%
 %\centerline{{\Huge\bf{Shizun Ge}}} % fontsize for Huge is 24.88
-\centerline{{\fontsize{35}{60}\selectfont \rg{Shizun Ge}}}
+% Usage: \fontsize{font-size}{baseline-skip}\selectfont
+\centerline{{\fontsize{35}{60}\selectfont \bf{Shizun Ge}}}
 \vspace{2em}
+% \tcbcolumns{2}
+% \tcbitem[add to width=-\columnWidthAdjust\textwidth]
+%   \headertitle{flushright title}{}{
+%     \begin{flushright}
+%       \fontsize{21}{0}\selectfont \bf{Shizun Ge}
+%     \end{flushright}
+%   }
+% \tcbitem[add to width=+\columnWidthAdjust\textwidth]
+%   \headertitle{flushleft title}{}{
+%     Experienced {\kw software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
+%   }
+% \end{tcbitemize}
 %%%%%%%%%%%%%%%%%%%%
 % Begin columns
 %%%%%%%%%%%%%%%%%%%%
@@ -235,6 +261,7 @@ BoldItalicFont  = *-BoldIt,
     \href{mailto:resume@shizunge.com}{resume@shizunge.com}\\
     \href{https://github.com/shizunge}{github.com/shizunge}\\
   }
+  \vspace{0.5em}
 
   \headerleft{Skills}{
     \skills{Software}{
@@ -248,7 +275,6 @@ BoldItalicFont  = *-BoldIt,
       Embedded\\
       Linux device driver\\
     }
-    \vspace{0.5em}
     \skills{FPGA}{
       Verilog\\
       SystemVerilog\\
@@ -275,45 +301,44 @@ BoldItalicFont  = *-BoldIt,
 %%%%%%%%%%%%%%%%%%%%
 \tcbitem[add to width=+\columnWidthAdjust\textwidth]
 
-  \headerright{Career summary}{
+  \headerright{Summary}{
     \begin{flushleft}
-    \begin{itemize}
-      \item Experienced {\kw software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
-    \end{itemize}
+    Experienced {\kw software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
     \end{flushleft}
   } % Career summary
+  \vspace{0.5em}
 
   \headerright{Experience}{
     \job{Senior Software Engineer}{9/2018}{Present}{Google}{Sunnyvale, CA}{
       \begin{itemize}
-        \item Led a software team developing simulators for the next generation TPU, while being a solid individual contributor proficient in {\kw C++}
+        \item Led a team of 8+ software engineers developing simulators for the next generation TPU, while contributing as a strong individual proficient in {\kw C++}
         \begin{itemize}
-          \item Scoped, planned, delegated and executed tasks
-          \item Collaborated with multiple hardware and software teams, prioritizing tasks, and delivering features on time to unblock tape-out
-          \item Defined a roadmap and provided insights for improved architecture
+          \item Defined the team's technical architectural roadmap and annual goals, aiming to accelerate new TPU time-to-market by months
+          \item Delivered 5+ generations of TPU simulator to internal customers, by scoping, planning, delegating and executing tasks
+          \item Secured on-time tape-out through cross-organizational collaboration with both hardware and software teams, priority alignment, and architectural influence
+          \item Developed a co-simulation framework using {\kw C++} and {\kw SystemVerilog}, enabling high-fidelity firmware verification while maintaining rapid development velocity
           \item Mentored and tutored new hires and junior team members
         \end{itemize}
-        \item Designed and developed a co-simulation framework for a FPGA product using {\kw C++} and {\kw SystemVerilog}
         \item Developed tools and test cases for hardware diagnostics in the platform infrastructure team, using {\kw Go}, {\kw C++} and {\kw Python}
       \end{itemize}
     }
 
     \job{Staff R\&D Engineer}{8/2013}{9/2018}{Synopsys}{Mountain View, CA}{
       \begin{itemize}
-        \item Led projects of HSTDM, a distinguishing technology for HAPS prototyping system, resulting in full adoption of HSTDM and success at customer sites
+        \item Led HSTDM, a distinguishing technology for HAPS FPGA-based prototyping system
         \begin{itemize}
-          \item Designed and implemented time-division multiplexing (TDM) IP in {\kw Verilog} based on Xilinx Select IO on {\kw Xilinx Virtex7} and {\kw Ultrascale} platform
-          \item Developed an IP insertion software flow using {\kw C++} and {\kw C}
-          \item Developed various {\kw Tcl} {\kw scripts} helping internal and external customers develop, debug, bringup and monitor FPGA prototyping system
+          \item Achieved 100\% adoption by focusing on an automated user experience, and optimizing the end-to-end workflow, including system partitioning and routing, IP insertion, synthesis, FPGA place-and-route, bring-up, and runtime monitoring
+          \item Architected, implemented and owned both HSTDM IP in {\kw Verilog}, and IP insertion and synthesis software in {\kw C++}, targeting {\kw Xilinx Virtex7} and {\kw Ultrascale}
+          \item Delivered various {\kw Tcl scripts} to both internal and external customers, accelerating debugging, system bring-up, and runtime monitoring
         \end{itemize}
         \item Designed and implemented a runtime software framework and IPs for SystemVerilog DPI on HAPS, using {\kw C++} and {\kw Verilog}
-        \item Coordinated multiple teams cross geographical coordinations, including software, firmware, hardware, testing, vendors and customers
+        \item Drove collaboration across globally distributed teams, including software, firmware, hardware, testing, application engineers, vendors and customers
       \end{itemize}
     }
 
     \job{Software Engineer}{10/2012}{8/2013}{Minor Studios Interactive LLC}{Los Angeles, CA}{
       \begin{itemize}
-        \item Developed real time HD video processing programs on GPU
+        \item Developed real time HD video processing programs on GPU, using {\kw CUDA}
       \end{itemize}
     }
     
@@ -325,7 +350,7 @@ BoldItalicFont  = *-BoldIt,
   } % Experience
 
   \headerright{Education}{
-    \education{Certificate}{Leadership and Management}{2025 (Expected)}
+    \education{Certificate}{Leadership and Management}{2025\\(Expected)}
       {UC Berkeley Extension}{Online}
     \education{Certificate}{Embedded Systems}{5/2019}
       {UCSC Silicon Valley Extension}{Santa Clara, CA}
