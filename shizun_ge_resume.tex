@@ -31,7 +31,7 @@
 \usepackage[most]{tcolorbox} % for \begin{tcolorbox}
 \usepackage{soul} % enable \hl{my text} for highlight
 %\usepackage[document]{ragged2e} %left aligned
-\usepackage{marvosym} % symbols like phone email
+\usepackage{fontawesome5} % symbols like phone email
 \usepackage{anyfontsize}
 \usepackage{fontspec}
 % \usepackage{sourcesanspro}
@@ -102,7 +102,7 @@ BoldItalicFont  = *-BoldIt,
 
 % larger number will narrow the left colmun.
 \def\rightColumnWidthAdjust{0.39}
-\def\columnWidthAdjust{0.29}
+\def\columnWidthAdjust{0.283}
 
 % create columes
 \newcommand{\tcbcolumns}[1]{
@@ -140,8 +140,8 @@ BoldItalicFont  = *-BoldIt,
       right skip=0pt, grow to right by=0pt,
       after=0pt, after skip=0pt,
       top=5pt, toprule=0pt,
-      left=5pt, leftrule=0pt,
-      right=5pt, rightrule=0pt,
+      left=2pt, leftrule=0pt,
+      right=2pt, rightrule=0pt,
       bottom=5pt, bottomrule=0pt,
       {#1}, title={#2},
   ]
@@ -256,9 +256,10 @@ BoldItalicFont  = *-BoldIt,
 \tcbitem[add to width=-\columnWidthAdjust\textwidth]
 
   \headerleft{Contact}{
-    +1-857-891-7998\\
-    \href{mailto:resume@shizunge.com}{resume@shizunge.com}\\
-    \href{https://github.com/shizunge}{github.com/shizunge}\\
+    Santa Clara, California \faMapMarker\\
+    \href{tel:+18578917998}{+1-857-891-7998} \faPhone\\
+    \href{mailto:resume@shizunge.com}{resume@shizunge.com} \faEnvelope\\
+    \href{https://github.com/shizunge}{github.com/shizunge} \faGithub\\
   }
 
   \headerleft{Skills}{
