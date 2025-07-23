@@ -139,10 +139,10 @@ BoldItalicFont  = *-BoldIt,
       left skip=0pt, grow to left by=0pt,
       right skip=0pt, grow to right by=0pt,
       after=0pt, after skip=0pt,
-      top=5pt, toprule=0pt,
+      top=2pt, toprule=0pt,
       left=2pt, leftrule=0pt,
       right=2pt, rightrule=0pt,
-      bottom=5pt, bottomrule=0pt,
+      bottom=2pt, bottomrule=0pt,
       {#1}, title={#2},
   ]
     {#3}
@@ -225,6 +225,15 @@ BoldItalicFont  = *-BoldIt,
   {#1} \textbullet\\
 }
 
+% define porjects
+% name, link, stars, image pulls, description
+\newcommand{\project}[5]{
+  \href{{#2}}{{#1}} \faGithub\\
+  {#5}\\
+  {#3} \faStar {#4} \faCloudDownload*\\
+  \vspace{0.5em}
+}
+
 \begin{document}
 \thispagestyle{empty}
 %%%%%%%%%%%%%%%%%%%%
@@ -256,9 +265,9 @@ BoldItalicFont  = *-BoldIt,
 \tcbitem[add to width=-\columnWidthAdjust\textwidth]
 
   \headerleft{Contact}{
-    Santa Clara, California \faMapMarker\\
+    Santa Clara, California\hspace{1ex}\faMapMarker*\\
     \href{tel:+18578917998}{+1-857-891-7998} \faPhone\\
-    \href{mailto:resume@shizunge.com}{resume@shizunge.com} \faEnvelope\\
+    \href{mailto:resume@shizunge.com}{resume@shizunge.com} \faEnvelope[regular]\\
     \href{https://github.com/shizunge}{github.com/shizunge} \faGithub\\
   }
 
@@ -294,6 +303,11 @@ BoldItalicFont  = *-BoldIt,
     \rb{Linux Device Drivers, Advanced}
     \rb{Linux Performance in the Cloud and Data Center}
     \rb{System Virtualization Fundamentals}
+  }
+  \headerleft{Projects}{
+    \project{shizunge/endlessh-go}{https://github.com/shizunge/endlessh-go}{1.1k+}{1M+}{Go, Prometheus, Grafana}
+    \project{shizunge/gantry}{https://github.com/shizunge/gantry}{70+}{1M+}{Bash, Docker}
+    \vspace{-0.5em}
   }
 
 %%%%%%%%%%%%%%%%%%%%
