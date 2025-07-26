@@ -2,7 +2,6 @@
 % use xelatex
 \documentclass[10pt,letter]{article}
 \usepackage[top=0.7in,bottom=0.7in,left=0.7in,right=0.7in]{geometry}
-\usepackage{color}
 \usepackage[
   colorlinks=true,
   urlcolor=black,
@@ -17,25 +16,12 @@
                technical leadership, cross-functional collaboration, system architecture, technical strategy, engineering excellence,
                \today},
 ]{hyperref}
-%\usepackage{flowfram} % Required for the multi-column layout
-%\usepackage[utf8]{inputenc} % Required for inputting international characters
-%http://bbs.ctex.org/forum.php?mod=viewthread&tid=43596
-%\usepackage{mathpazo}
-%\usepackage[garamond]{mathdesign}
-%\usepackage{charter}
-%\usepackage{fourier}
-%\usepackage{times}
 \usepackage{enumitem} % Required for modifying lists
 \setlist{noitemsep,nolistsep,leftmargin=*} % Remove spacing within and around lists
-\usepackage[dvipsnames]{xcolor} % for \colorbox
 \usepackage[most]{tcolorbox} % for \begin{tcolorbox}
-\usepackage{soul} % enable \hl{my text} for highlight
-%\usepackage[document]{ragged2e} %left aligned
+\usepackage{accsupp} % \BeginAccSupp
 \usepackage{fontawesome5} % symbols like phone email
-\usepackage{anyfontsize}
-\usepackage{fontspec}
-% \usepackage{sourcesanspro}
-% \usepackage[T1]{fontenc}
+\usepackage{fontspec} % setmainfont
 
 % !TEX TS-program = XeLaTeX
 
@@ -46,6 +32,8 @@
 % apk add texmf-dist-fontsextra
 % Path used locally
 % \newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+% mkdir -p /usr/share/texlive/texmf-dist/fonts/opentype/adobe
+% ln -s /usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro /opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro
 % Path used by github action
 \newcommand{\sourcesanspropath}{/opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
 \setmainfont{SourceSansPro}[
@@ -212,25 +200,42 @@ BoldItalicFont  = *-BoldIt,
   \vspace{0.5em}
 }
 
+\newcommand{\address}[1]{
+  \BeginAccSupp{ActualText={Address: #1}} {#1}\hspace{1ex}\faMapMarker*\EndAccSupp{}
+}
+\newcommand{\phone}[1]{
+  \BeginAccSupp{ActualText={Phone: #1}} \href{tel:#1}{#1} \faPhone\EndAccSupp{}
+}
+\newcommand{\email}[1]{
+  \BeginAccSupp{ActualText={Email: #1}} \href{mailto:#1}{#1} \faEnvelope[regular]\EndAccSupp{}
+}
+\newcommand{\github}[2]{
+  \BeginAccSupp{ActualText={Github: #2}} \href{#2}{#1} \faGithub\EndAccSupp{}
+}
+% add bullet to the right
+\newcommand{\rightbullet}[1]{
+  \BeginAccSupp{ActualText={#1}} #1 \textbullet\EndAccSupp{}
+}
+\newcommand{\stars}[1]{
+  \BeginAccSupp{ActualText={#1 stars}} #1 \faStar\EndAccSupp{}
+}
+\newcommand{\imagepulls}[1]{
+  \BeginAccSupp{ActualText={#1 image pulls}} #1 \faCloudDownload*\EndAccSupp{}
+}
+% define porjects
+% name, link, stars, image pulls, description
+\newcommand{\project}[5]{
+  \github{#1}{#2}\\
+  {#5}\\
+  \stars{#3}\imagepulls{#4}\\
+  \vspace{0.5em}
+}
+
 % define skills
 % categories; items
 \newcommand{\skills}[2]{
   {\bf{#1}}\\
   {#2}
-  \vspace{0.5em}
-}
-
-% add bullet to the right
-\newcommand{\rb}[1]{
-  {#1} \textbullet\\
-}
-
-% define porjects
-% name, link, stars, image pulls, description
-\newcommand{\project}[5]{
-  \href{{#2}}{{#1}} \faGithub\\
-  {#5}\\
-  {#3} \faStar {#4} \faCloudDownload*\\
   \vspace{0.5em}
 }
 
@@ -265,10 +270,10 @@ BoldItalicFont  = *-BoldIt,
 \tcbitem[add to width=-\columnWidthAdjust\textwidth]
 
   \headerleft{Contact}{
-    Santa Clara, California\hspace{1ex}\faMapMarker*\\
-    \href{tel:+18578917998}{+1-857-891-7998} \faPhone\\
-    \href{mailto:resume@shizunge.com}{resume@shizunge.com} \faEnvelope[regular]\\
-    \href{https://github.com/shizunge}{github.com/shizunge} \faGithub\\
+    \address{Santa Clara, California}\\
+    \phone{+1-857-891-7998}\\
+    \email{resume@shizunge.com}\\
+    \github{github.com/shizunge}{https://github.com/shizunge}\\
   }
 
   \headerleft{Skills}{
@@ -298,11 +303,11 @@ BoldItalicFont  = *-BoldIt,
   }
 
   \headerleft{Recent coursework}{
-    \rb{Effective Leadership and Management}
-    \rb{IO Concepts and Protocols: PCI Express, Ethernet, and Fibre Channel}
-    \rb{Linux Device Drivers, Advanced}
-    \rb{Linux Performance in the Cloud and Data Center}
-    \rb{System Virtualization Fundamentals}
+    \rightbullet{Effective Leadership and Management}\\
+    \rightbullet{IO Concepts and Protocols: PCI Express, Ethernet, and Fibre Channel}\\
+    \rightbullet{Linux Device Drivers, Advanced}\\
+    \rightbullet{Linux Performance in the Cloud and Data Center}\\
+    \rightbullet{System Virtualization Fundamentals}\\
   }
   \headerleft{Projects}{
     \project{shizunge/endlessh-go}{https://github.com/shizunge/endlessh-go}{1.1k+}{1M+}{Go, Prometheus, Grafana}
