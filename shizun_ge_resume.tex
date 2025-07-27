@@ -200,6 +200,9 @@ BoldItalicFont  = *-BoldIt,
   \vspace{0.5em}
 }
 
+% add new log var used in \github
+\newif\ifisGithubProject
+\isGithubProjectfalse % default to false
 \newcommand{\address}[1]{
   \BeginAccSupp{ActualText={Address: #1}} {#1}\hspace{1ex}\faMapMarker*\EndAccSupp{}
 }
@@ -209,25 +212,31 @@ BoldItalicFont  = *-BoldIt,
 \newcommand{\email}[1]{
   \BeginAccSupp{ActualText={Email: #1}} \href{mailto:#1}{#1} \faEnvelope[regular]\EndAccSupp{}
 }
-\newcommand{\github}[2]{
-  \BeginAccSupp{ActualText={Github: #2}} \href{#2}{#1} \faGithub\EndAccSupp{}
+\newcommand{\github}[1]{
+  \ifisGithubProject
+  \BeginAccSupp{ActualText={Github: https://github.com/#1}} \href{https://github.com/#1}{#1} \faGithub\EndAccSupp{}
+  \else
+  \BeginAccSupp{ActualText={Github: https://#1}} \href{https://#1}{#1} \faGithub\EndAccSupp{}
+  \fi
 }
 % add bullet to the right
-\newcommand{\rightbullet}[1]{
+\newcommand{\rightBullet}[1]{
   \BeginAccSupp{ActualText={#1}} #1 \textbullet\EndAccSupp{}
 }
 \newcommand{\stars}[1]{
   \BeginAccSupp{ActualText={#1 stars}} #1 \faStar\EndAccSupp{}
 }
-\newcommand{\imagepulls}[1]{
+\newcommand{\imagePulls}[1]{
   \BeginAccSupp{ActualText={#1 image pulls}} #1 \faCloudDownload*\EndAccSupp{}
 }
 % define porjects
-% name, link, stars, image pulls, description
-\newcommand{\project}[5]{
-  \github{#1}{#2}\\
-  {#5}\\
-  \stars{#3}\imagepulls{#4}\\
+% name, stars, image pulls, description
+\newcommand{\githubProject}[4]{
+  \isGithubProjecttrue
+  \github{#1}\\
+  {#4}\\
+  \stars{#2}\imagePulls{#3}\\
+  \isGithubProjectfalse
   \vspace{0.5em}
 }
 
@@ -273,7 +282,7 @@ BoldItalicFont  = *-BoldIt,
     \address{Santa Clara, California}\\
     \phone{+1-857-891-7998}\\
     \email{resume@shizunge.com}\\
-    \github{github.com/shizunge}{https://github.com/shizunge}\\
+    \github{github.com/shizunge}\\
   }
 
   \headerleft{Skills}{
@@ -303,15 +312,15 @@ BoldItalicFont  = *-BoldIt,
   }
 
   \headerleft{Recent coursework}{
-    \rightbullet{Effective Leadership and Management}\\
-    \rightbullet{IO Concepts and Protocols: PCI Express, Ethernet, and Fibre Channel}\\
-    \rightbullet{Linux Device Drivers, Advanced}\\
-    \rightbullet{Linux Performance in the Cloud and Data Center}\\
-    \rightbullet{System Virtualization Fundamentals}\\
+    \rightBullet{Effective Leadership and Management}\\
+    \rightBullet{IO Concepts and Protocols: PCI Express, Ethernet, and Fibre Channel}\\
+    \rightBullet{Linux Device Drivers, Advanced}\\
+    \rightBullet{Linux Performance in the Cloud and Data Center}\\
+    \rightBullet{System Virtualization Fundamentals}\\
   }
   \headerleft{Projects}{
-    \project{shizunge/endlessh-go}{https://github.com/shizunge/endlessh-go}{1.1k+}{1M+}{Go, Prometheus, Grafana}
-    \project{shizunge/gantry}{https://github.com/shizunge/gantry}{70+}{1M+}{Bash, Docker}
+    \githubProject{shizunge/endlessh-go}{1.1k+}{1M+}{Go, Prometheus, Grafana}
+    \githubProject{shizunge/gantry}{70+}{1M+}{Bash, Docker}
     \vspace{-0.5em}
   }
 
