@@ -1,5 +1,6 @@
 % Copyright (C) 2020-2025 Shizun Ge
 % use xelatex
+% !TEX TS-program = XeLaTeX
 \documentclass[10pt,letter]{article}
 \usepackage[top=0.7in,bottom=0.7in,left=0.7in,right=0.7in]{geometry}
 \usepackage[
@@ -21,19 +22,19 @@
 \usepackage[most]{tcolorbox} % for \begin{tcolorbox}
 \usepackage{accsupp} % \BeginAccSupp
 \usepackage{fontawesome5} % symbols like phone email
+\usepackage{ifxetex} % \ifxetex
+
+\ifxetex
 \usepackage{fontspec} % setmainfont
-
-% !TEX TS-program = XeLaTeX
-
-% To install the font on Unbuntu:
+% To install the font on Ubuntu:
 % sudo add-apt-repository ppa:texlive-backports/ppa
 % sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
-% To install the font on Alpine
-% apk add texmf-dist-fontsextra
-% Path used locally
-% \newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
 % mkdir -p /usr/share/texlive/texmf-dist/fonts/opentype/adobe
 % ln -s /usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro /opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro
+% Path used on Ubuntu
+% \newcommand{\sourcesanspropath}{/usr/share/texlive/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
+% To install the font on Alpine
+% apk add texmf-dist-fontsextra
 % Path used by github action
 \newcommand{\sourcesanspropath}{/opt/texlive/texdir/texmf-dist/fonts/opentype/adobe/sourcesanspro/}
 \setmainfont{SourceSansPro}[
@@ -43,9 +44,10 @@ ItalicFont  = *-ExtraLightIt,
 BoldFont    = *-Bold,
 BoldItalicFont  = *-BoldIt,
 ]
-\newfontface\lt{SourceSansPro-Light}[Path=\sourcesanspropath,]
-\newfontface\rg{SourceSansPro-Regular}[Path=\sourcesanspropath,]
-\newfontface\kw{SourceSansPro-Bold}[Path=\sourcesanspropath,]
+% \newfontface\lt{SourceSansPro-Light}[Path=\sourcesanspropath,]
+% \newfontface\rg{SourceSansPro-Regular}[Path=\sourcesanspropath,]
+% \newfontface\kw{SourceSansPro-Bold}[Path=\sourcesanspropath,]
+\fi % \ifxetex
 
 \definecolor{googleblue050}{HTML}{E8F0FE}
 \definecolor{googleblue100}{HTML}{D2E3FC}
@@ -118,8 +120,6 @@ BoldItalicFont  = *-BoldIt,
   \begin{tcolorbox}[
       enhanced jigsaw, 
       colback=white, colframe=white,
-      colbacktitle=white, coltitle=black,
-      colbacktitle=googleblue900, coltitle=white,
       colbacktitle=white, coltitle=black,
       boxrule=0pt, arc=0pt, boxsep=0pt,
       toptitle=5pt, bottomtitle=5pt, titlerule=0pt, 
@@ -248,6 +248,9 @@ BoldItalicFont  = *-BoldIt,
   \vspace{0.5em}
 }
 
+% keyword
+\newcommand{\kw}[1]{{\bf{#1}}}
+
 \begin{document}
 \thispagestyle{empty}
 %%%%%%%%%%%%%%%%%%%%
@@ -266,7 +269,7 @@ BoldItalicFont  = *-BoldIt,
 %   }
 % \tcbitem[add to width=+\columnWidthAdjust\textwidth]
 %   \headertitle{flushleft title}{}{
-%     Experienced {\kw software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
+%     Experienced \kw{software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
 %   }
 % \end{tcbitemize}
 %%%%%%%%%%%%%%%%%%%%
@@ -331,22 +334,22 @@ BoldItalicFont  = *-BoldIt,
 
   \headerright{Summary}{
     \begin{flushleft}
-    Experienced {\kw software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
+    Experienced \kw{software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
     \end{flushleft}
   } % Career summary
 
   \headerright{Experience}{
     \job{Senior Software Engineer}{9/2018}{Present}{Google}{Sunnyvale, CA}{
       \begin{itemize}
-        \item Led a team of 8+ software engineers developing simulators for the next generation TPU, while contributing as a strong individual proficient in {\kw C++}
+        \item Led a team of 8+ software engineers developing simulators for the next generation TPU, while contributing as a strong individual proficient in \kw{C++}
         \begin{itemize}
           \item Defined the team's technical architectural roadmap and annual goals, aiming to accelerate new TPU time-to-market by months
           \item Delivered 5+ generations of TPU simulator to customers, by scoping, planning, delegating and executing tasks
           \item Secured on-time tape-out through cross-organizational collaboration with both hardware and software teams, priority alignment, and architectural influence
-          \item Developed a co-simulation framework using {\kw C++} and {\kw SystemVerilog}, enabling high-fidelity firmware verification while maintaining rapid development velocity
+          \item Developed a co-simulation framework using \kw{C++} and \kw{SystemVerilog}, enabling high-fidelity firmware verification while maintaining rapid development velocity
           \item Mentored and tutored new hires and junior team members
         \end{itemize}
-        \item Developed tools and test cases for hardware diagnostics in the platform infrastructure team, using {\kw Go}, {\kw C++} and {\kw Python}
+        \item Developed tools and test cases for hardware diagnostics in the platform infrastructure team, using \kw{Go}, \kw{C++} and \kw{Python}
       \end{itemize}
     }
 
@@ -355,17 +358,17 @@ BoldItalicFont  = *-BoldIt,
         \item Led HSTDM, a distinguishing technology for HAPS FPGA-based prototyping system
         \begin{itemize}
           \item Achieved 100\% adoption by focusing on an automated user experience, and optimizing the end-to-end workflow
-          \item Architected, implemented and owned both HSTDM IP in {\kw Verilog}, and IP insertion and synthesis software in {\kw C++}, targeting {\kw Xilinx Virtex7} and {\kw Ultrascale}
-          \item Delivered various {\kw Tcl scripts} to customers, accelerating debugging (weeks to hours), system bring-up, and runtime monitoring
+          \item Architected, implemented and owned both HSTDM IP in \kw{Verilog}, and IP insertion and synthesis software in \kw{C++}, targeting \kw{Xilinx Virtex7} and \kw{Ultrascale}
+          \item Delivered various \kw{Tcl scripts} to customers, accelerating debugging (weeks to hours), system bring-up, and runtime monitoring
         \end{itemize}
-        \item Designed and implemented a runtime software framework and IPs for SystemVerilog DPI on HAPS, using {\kw C++} and {\kw Verilog}
+        \item Designed and implemented a runtime software framework and IPs for SystemVerilog DPI on HAPS, using \kw{C++} and \kw{Verilog}
         \item Drove collaboration across globally distributed teams, including software, firmware, hardware, testing, application engineers, vendors and customers
       \end{itemize}
     }
 
     \job{Software Engineer}{10/2012}{8/2013}{Minor Studios Interactive LLC}{Los Angeles, CA}{
       \begin{itemize}
-        \item Developed real time HD video processing programs on GPU, using {\kw CUDA}
+        \item Developed real time HD video processing programs on GPU, using \kw{CUDA}
       \end{itemize}
     }
     
