@@ -1,8 +1,8 @@
 % Copyright (C) 2020-2025 Shizun Ge
-% use xelatex
+% use xelatex, required by fontspec
 % !TEX TS-program = XeLaTeX
 \documentclass[10pt,letter]{article}
-\usepackage[top=0.7in,bottom=0.7in,left=0.7in,right=0.7in]{geometry}
+\usepackage[top=0.75in,bottom=0.75in,left=0.75in,right=0.75in]{geometry}
 \usepackage[
   colorlinks=true,
   urlcolor=black,
@@ -23,9 +23,10 @@
 \usepackage{accsupp} % \BeginAccSupp
 \usepackage{fontawesome5} % symbols like phone email
 \usepackage{ifxetex} % \ifxetex
+\usepackage{xstring} % \IfSubStr
 
 \ifxetex
-\usepackage{fontspec} % setmainfont
+\usepackage{fontspec} % \setmainfont
 % To install the font on Ubuntu:
 % sudo add-apt-repository ppa:texlive-backports/ppa
 % sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
@@ -90,119 +91,59 @@ BoldItalicFont  = *-BoldIt,
 \definecolor{googlegreen800}{HTML}{137333}
 \definecolor{googlegreen900}{HTML}{0D652D}
 
-% larger number will narrow the left colmun.
-\def\rightColumnWidthAdjust{0.39}
-\def\columnWidthAdjust{0.283}
+% Width of the left column and gap between columns.
+\def\leftColumnWidth{10.7em}
+\def\leftColumnGap{0.9em}
+\def\rightColumnYearWidth{4.2em}
+\def\rightColumnYearGap{0.5em}
+% Space between sections.
+\def\sectionSpace{3pt}
 
-% create columes
-\newcommand{\tcbcolumns}[1]{
-  \begin{tcbitemize}
-  [
-    colframe=white, colback=white, arc=0pt, boxrule=0pt
-    raster columns={#1}, raster force size=false,
-    raster valign=top, raster column skip=0.5em,
-    raster left skip=0pt, raster right skip=0pt,
-    raster before skip=0pt, raster after skip=0pt,
-    before=0pt, before skip=0pt,
-    left=0pt, grow to left by=0pt,
-    right=0pt, grow to right by=0pt,
-    after=0pt, after skip=0pt,
-    boxsep=0pt,
-    top=0pt, toprule=0pt,
-    left=0pt, leftrule=0pt,
-    right=0pt, rightrule=0pt,
-    bottom=0pt, bottomrule=0pt,
-  ]
+% Create columes
+\tcbset{commonBox/.style={
+  colbacktitle=white, coltitle=black,
+  toptitle=0pt, bottomtitle=0pt, titlerule=0pt,
+  colframe=white, colback=white,
+  boxrule=0pt, arc=0pt, boxsep=0pt,
+  before=0pt, before skip=0pt,
+  after=0pt, after skip=0pt,
+  left=0pt, left skip=0pt, grow to left by=0pt,
+  right=0pt, right skip=0pt, grow to right by=0pt,
+  top=0pt, toprule=0pt,
+  middle=\sectionSpace,
+  bottom=0pt, bottomrule=0pt,
+  left=0pt, leftrule=0pt,
+  right=0pt, rightrule=0pt,
+}}
+\tcbset{twoBoxes/.style={
+  sidebyside=true, lower separated=false, sidebyside align=top,
+}}
+\newtcolorbox{resume}[1]{
+  commonBox, twoBoxes,
+  lefthand width=\leftColumnWidth, sidebyside gap=\leftColumnGap,
+  halign upper=flush right, halign lower=flush left,
+  % fontsize for Huge is 24.88
+  % Usage: \fontsize{font-size}{baseline-skip}\selectfont
+  before title={\fontsize{35}{2em}\selectfont}, after title={\\\ },
+  center title, title={\bf{#1}},
 }
-
-% header
-\newcommand{\headertitle}[3]{
-  \begin{tcolorbox}[
-      enhanced jigsaw, 
-      colback=white, colframe=white,
-      colbacktitle=white, coltitle=black,
-      boxrule=0pt, arc=0pt, boxsep=0pt,
-      toptitle=5pt, bottomtitle=5pt, titlerule=0pt, 
-      before=0pt, before skip=0pt,
-      left skip=0pt, grow to left by=0pt,
-      right skip=0pt, grow to right by=0pt,
-      after=0pt, after skip=0pt,
-      top=2pt, toprule=0pt,
-      left=2pt, leftrule=0pt,
-      right=2pt, rightrule=0pt,
-      bottom=2pt, bottomrule=0pt,
-      {#1}, title={#2},
-  ]
-    {#3}
-  \end{tcolorbox}
-}
-
-% header on the right column
-\newcommand{\headerright}[2]{
-  \headertitle{flushleft title}{\bf\LARGE\textsc{#1}}{
-    %\begin{flushleft}
-      {#2}
-    %\end{flushleft}
-  }
+% Create two sub-columns in the right column
+\newtcolorbox{rightColumnTwoBoxes}{
+  commonBox, twoBoxes,
+  lefthand width=\rightColumnYearWidth, sidebyside gap=\rightColumnYearGap,
+  halign upper=flush left, halign lower=flush left,
+  bottom=\sectionSpace,
 }
 
 % header on the left column
-\newcommand{\headerleft}[2]{
-  \headertitle{flushright title}{\bf\large\textsc{#1}}{
-    \begin{flushright}
-      {#2}
-    \end{flushright}
-  }
+\newcommand{\headerLeft}[1]{
+  \tcbsubtitle[halign upper=flush right]{\bf\large\textsc{#1}}
+}
+% header on the right column
+\newcommand{\headerRight}[1]{
+  \tcbsubtitle[halign upper=flush left]{\bf\LARGE\textsc{#1}}
 }
 
-% create two sub-columns in the right column
-\newcommand{\rightcolumntwoboxes}[2]{
-  \tcbcolumns{2}
-    \tcbitem[add to width=-\rightColumnWidthAdjust\textwidth]
-      \begin{flushleft}
-        {#1}
-      \end{flushleft}
-    \tcbitem[add to width=+\rightColumnWidthAdjust\textwidth]
-      \begin{flushleft}
-        {#2}
-      \end{flushleft}
-  \end{tcbitemize}
-}
-
-% define jobs
-% position; start time; end time;
-% employer; location; details;
-\newcommand{\job}[6]{
-  \rightcolumntwoboxes{
-    {#2}\\{#3}
-  }{
-    {\bf {#1}}\\
-    {{#4}},\ {\it {#5}}
-    {#6}
-    \vspace{0.5em}
-  }
-}
-
-% define schools
-% degree; area/major; time; school; location;
-\newcommand{\education}[5]{
-  \rightcolumntwoboxes{
-    {#3}
-  }{
-    {\bf {#1}} {#2}\\
-    {{#4}},\ {\it {#5}}
-    \vspace{0.5em}
-  }
-}
-% degree; area/major; time; school; location;
-\newcommand{\educationleft}[5]{
-  {\bf {#1}}\\{#2}\\{{#4}}\\
-  \vspace{0.5em}
-}
-
-% add new log var used in \github
-\newif\ifisGithubProject
-\isGithubProjectfalse % default to false
 \newcommand{\address}[1]{
   \BeginAccSupp{ActualText={Address: #1}} {#1}\hspace{1ex}\faMapMarker*\EndAccSupp{}
 }
@@ -213,11 +154,9 @@ BoldItalicFont  = *-BoldIt,
   \BeginAccSupp{ActualText={Email: #1}} \href{mailto:#1}{#1} \faEnvelope[regular]\EndAccSupp{}
 }
 \newcommand{\github}[1]{
-  \ifisGithubProject
-  \BeginAccSupp{ActualText={Github: https://github.com/#1}} \href{https://github.com/#1}{#1} \faGithub\EndAccSupp{}
-  \else
-  \BeginAccSupp{ActualText={Github: https://#1}} \href{https://#1}{#1} \faGithub\EndAccSupp{}
-  \fi
+  % \IfSubStr{<string>}{<substring>}{<true_code>}{<false_code>}
+  \IfSubStr{#1}{github.com/}{\def\githubLink{https://#1}}{\def\githubLink{https://github.com/#1}}
+  \BeginAccSupp{ActualText={Github: \githubLink}} \href{\githubLink}{#1} \faGithub\EndAccSupp{}
 }
 % add bullet to the right
 \newcommand{\rightBullet}[1]{
@@ -229,66 +168,70 @@ BoldItalicFont  = *-BoldIt,
 \newcommand{\imagePulls}[1]{
   \BeginAccSupp{ActualText={#1 image pulls}} #1 \faCloudDownload*\EndAccSupp{}
 }
-% define porjects
-% name, stars, image pulls, description
-\newcommand{\githubProject}[4]{
-  \isGithubProjecttrue
-  \github{#1}\\
-  {#4}\\
-  \stars{#2}\imagePulls{#3}\\
-  \isGithubProjectfalse
-  \vspace{0.5em}
-}
-
-% define skills
-% categories; items
-\newcommand{\skills}[2]{
-  {\bf{#1}}\\
-  {#2}
-  \vspace{0.5em}
-}
-
 % keyword
 \newcommand{\kw}[1]{{\bf{#1}}}
+
+% define skills
+% (1) categories; (2) items
+\newcommand{\skills}[2]{
+  \tcbsubtitle[halign upper=flush right]{\bf{#1}}
+  {#2}
+}
+
+% define projects on github
+% (1) name, (2) stars, (3) image pulls, (4) description
+\newcommand{\githubProject}[4]{
+  \tcbsubtitle[halign upper=flush right, bottom=-\sectionSpace]{\github{#1}}
+  {#4}\\
+  \stars{#2}\imagePulls{#3}
+}
+
+% define jobs
+% (1) position; (2) start time; (3) end time;
+% (4) employer; (5) location; (6) details;
+\newcommand{\job}[6]{
+  \begin{rightColumnTwoBoxes}
+    {#2}\\{#3}
+  \tcblower
+    {\bf {#1}}\\
+    {{#4}},\ {\it {#5}}
+    {#6}
+  \end{rightColumnTwoBoxes}
+}
+
+% define schools
+% (1) degree; (2) area/major; (3) time; (4) school; (5) location;
+\newcommand{\education}[5]{
+  \begin{rightColumnTwoBoxes}
+    {#3}
+  \tcblower
+    {\bf {#1}} {#2}\\
+    {{#4}},\ {\it {#5}}
+  \end{rightColumnTwoBoxes}
+}
+% (1) degree; (2) area/major; (3) time; (4) school; (5) location;
+\newcommand{\educationLeft}[5]{
+  \tcbsubtitle[halign upper=flush right]{
+    {\bf {#1}}\\{#2}\\{{#4}}
+  }
+}
 
 \begin{document}
 \thispagestyle{empty}
 %%%%%%%%%%%%%%%%%%%%
-% HEADER
-%%%%%%%%%%%%%%%%%%%%
-%\centerline{{\Huge\bf{Shizun Ge}}} % fontsize for Huge is 24.88
-% Usage: \fontsize{font-size}{baseline-skip}\selectfont
-\centerline{{\fontsize{35}{60}\selectfont \bf{Shizun Ge}}}
-\vspace{2em}
-% \tcbcolumns{2}
-% \tcbitem[add to width=-\columnWidthAdjust\textwidth]
-%   \headertitle{flushright title}{}{
-%     \begin{flushright}
-%       \fontsize{21}{0}\selectfont \bf{Shizun Ge}
-%     \end{flushright}
-%   }
-% \tcbitem[add to width=+\columnWidthAdjust\textwidth]
-%   \headertitle{flushleft title}{}{
-%     Experienced \kw{software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
-%   }
-% \end{tcbitemize}
-%%%%%%%%%%%%%%%%%%%%
 % Begin columns
 %%%%%%%%%%%%%%%%%%%%
-\tcbcolumns{2}
+\begin{resume}{Shizun Ge}
 %%%%%%%%%%%%%%%%%%%%
-% First column
+% Left column
 %%%%%%%%%%%%%%%%%%%%
-\tcbitem[add to width=-\columnWidthAdjust\textwidth]
-
-  \headerleft{Contact}{
+  \headerLeft{Contact}
     \address{Santa Clara, California}\\
     \phone{+1-857-891-7998}\\
     \email{resume@shizunge.com}\\
     \github{github.com/shizunge}\\
-  }
 
-  \headerleft{Skills}{
+  \headerLeft{Skills}
     \skills{Software}{
       C++\\
       C\\
@@ -311,34 +254,27 @@ BoldItalicFont  = *-BoldIt,
       Verdi\\
       Xilinx Vivado\\
     }
-    \vspace{-0.5em}
-  }
 
-  \headerleft{Recent coursework}{
+  \headerLeft{Recent coursework}
     \rightBullet{Effective Leadership and Management}\\
     \rightBullet{IO Concepts and Protocols: PCI Express, Ethernet, and Fibre Channel}\\
     \rightBullet{Linux Device Drivers, Advanced}\\
     \rightBullet{Linux Performance in the Cloud and Data Center}\\
     \rightBullet{System Virtualization Fundamentals}\\
-  }
-  \headerleft{Projects}{
-    \githubProject{shizunge/endlessh-go}{1.1k+}{1M+}{Go, Prometheus, Grafana}
-    \githubProject{shizunge/gantry}{70+}{1M+}{Bash, Docker}
-    \vspace{-0.5em}
-  }
+
+  \headerLeft{Projects}
+    \githubProject{shizunge/endlessh-go}{1.1k+}{1M+}{Go, Prometheus, Grafana}\\
+    \githubProject{shizunge/gantry}{70+}{1M+}{Bash, Docker}\\
 
 %%%%%%%%%%%%%%%%%%%%
-% Second column
+% Right column
 %%%%%%%%%%%%%%%%%%%%
-\tcbitem[add to width=+\columnWidthAdjust\textwidth]
-
-  \headerright{Summary}{
-    \begin{flushleft}
+\tcblower
+  \headerRight{Summary}
     Experienced \kw{software engineer}, leading a team to deliver verification and validation solutions to lower the barrier to designing semiconductor chips
-    \end{flushleft}
-  } % Career summary
+  % Summary
 
-  \headerright{Experience}{
+  \headerRight{Experience}
     \job{Senior Software Engineer}{9/2018}{Present}{Google}{Sunnyvale, CA}{
       \begin{itemize}
         \item Led a team of 8+ software engineers developing simulators for the next generation TPU, while contributing as a strong individual proficient in \kw{C++}
@@ -352,7 +288,6 @@ BoldItalicFont  = *-BoldIt,
         \item Developed tools and test cases for hardware diagnostics in the platform infrastructure team, using \kw{Go}, \kw{C++} and \kw{Python}
       \end{itemize}
     }
-
     \job{Staff R\&D Engineer}{8/2013}{9/2018}{Synopsys}{Mountain View, CA}{
       \begin{itemize}
         \item Led HSTDM, a distinguishing technology for HAPS FPGA-based prototyping system
@@ -365,23 +300,20 @@ BoldItalicFont  = *-BoldIt,
         \item Drove collaboration across globally distributed teams, including software, firmware, hardware, testing, application engineers, vendors and customers
       \end{itemize}
     }
-
     \job{Software Engineer}{10/2012}{8/2013}{Minor Studios Interactive LLC}{Los Angeles, CA}{
       \begin{itemize}
         \item Developed real time HD video processing programs on GPU, using \kw{CUDA}
       \end{itemize}
     }
-    
     \job{Research Assistant}{9/2011}{9/2012}{Boston University}{Boston, MA}{
       \begin{itemize}
         \item Developed error control codes algorithm to prevent side-channel attacks
       \end{itemize}
     }
+    \vspace{-\sectionSpace}
+  % Experience
 
-    \vspace{-0.5em}
-  } % Experience
-
-  \headerright{Education}{
+  \headerRight{Education}
     \education{Certificate}{Leadership and Management (2025), Business Administration (2026)}{2025-2026\\(Expected)}
       {UC Berkeley Extension}{Online}
     \education{Certificate}{Embedded Systems}{5/2019}
@@ -390,12 +322,12 @@ BoldItalicFont  = *-BoldIt,
       {Boston University College of Engineering}{Boston, MA}
     \education{Bachelor of Engineering}{in Electronic Engineering}{5/2010}
       {The Chinese University of Hong Kong}{Hong Kong SAR}
-    \vspace{-0.5em}
-  } % Education
+    \vspace{-\sectionSpace}
+  % Education
 
 %%%%%%%%%%%%%%%%%%%%
 % End columns
 %%%%%%%%%%%%%%%%%%%%
-\end{tcbitemize}
+\end{resume}
 
 \end{document}
