@@ -44,13 +44,29 @@ jobs:
           # latexmk_use_lualatex: # optional
           # Instruct latexmk to use XeLaTeX
           latexmk_use_xelatex: true # optional
-      - name: Upload Release Asset
-        id: upload-release-asset
+      - name: Upload PDF to Release Asset
+        id: upload-pdf-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: shizun_ge_resume.pdf
           asset_name: shizun_ge_resume.pdf
           asset_content_type: application/pdf
+      - name: PDF to PNG
+        uses: jy95/ghostscript-action@v1
+        with:
+          file: shizun_ge_resume.pdf
+          output: shizun_ge_resume.png
+          arbitrary-parameters: '-sDEVICE=png16m -dTextAlphaBits=4 -r300'
+      - name: Upload PNG to Release Asset
+        id: upload-png-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: shizun_ge_resume.png
+          asset_name: shizun_ge_resume.png
+          asset_content_type: application/png

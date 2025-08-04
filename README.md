@@ -6,4 +6,6 @@
 
 ## [Download](https://github.com/shizunge/resume/releases/latest/download/shizun_ge_resume.pdf)
 
+![Resume image](https://github.com/shizunge/resume/releases/latest/download/shizun_ge_resume.png)
+
 Copyright 2020-2025 Shizun Ge
