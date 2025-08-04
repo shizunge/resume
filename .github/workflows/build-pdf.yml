@@ -20,15 +20,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set up Git repository
         uses: actions/checkout@v4
-      - name: Cache
-        uses: actions/cache@v4.2.3
-        with:
-          # A list of files, directories, and wildcard patterns to cache and restore
-          path: .*
-          # An explicit key for restoring and saving the cache
-          key: cache
-          # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
-          # restore-keys: # optional
       - name: Github Action for LaTeX
         # You may pin to the exact commit or the version.
         # uses: xu-cheng/latex-action@dacf2cfbdd5fd768c2298cbdc9e105bd9ed7f293
@@ -56,8 +47,16 @@ jobs:
           # latexmk_use_lualatex: # optional
           # Instruct latexmk to use XeLaTeX
           latexmk_use_xelatex: true # optional
-      - name: Upload PDF
+      - name: PDF to PNG
+        uses: jy95/ghostscript-action@v1
+        with:
+          file: shizun_ge_resume.pdf
+          output: shizun_ge_resume.png
+          arbitrary-parameters: '-sDEVICE=png16m -dTextAlphaBits=4 -r300'
+      - name: Upload files
         uses: actions/upload-artifact@v4
         with:
           name: shizun_ge_resume
-          path: shizun_ge_resume.pdf
+          path: |
+            shizun_ge_resume.pdf
+            shizun_ge_resume.png
