@@ -101,22 +101,12 @@ BoldItalicFont  = *-BoldIt,
 
 % Create columes
 \tcbset{commonBox/.style={
+  blank,
   colbacktitle=white, coltitle=black,
   toptitle=0pt, bottomtitle=0pt, titlerule=0pt,
-  colframe=white, colback=white,
-  boxrule=0pt, arc=0pt, boxsep=0pt,
-  before=0pt, before skip=0pt,
-  after=0pt, after skip=0pt,
-  left=0pt, left skip=0pt, grow to left by=0pt,
-  right=0pt, right skip=0pt, grow to right by=0pt,
-  top=0pt, toprule=0pt,
-  middle=\sectionSpace,
-  bottom=0pt, bottomrule=0pt,
-  left=0pt, leftrule=0pt,
-  right=0pt, rightrule=0pt,
 }}
-\tcbset{rasterBoxes/.style={
-  commonBox, 
+\tcbset{rasterBox/.style={
+  commonBox,
   raster before skip=0pt, raster after skip=0pt,
   raster left skip=0pt, raster right skip=0pt,
   raster valign=top, raster force size=false,
@@ -130,36 +120,33 @@ BoldItalicFont  = *-BoldIt,
   halign upper=flush right, halign lower=flush left,
   % fontsize for Huge is 24.88
   % Usage: \fontsize{font-size}{baseline-skip}\selectfont
-  before title={\fontsize{35}{2em}\selectfont}, after title={\\\ },
-  center title, title={\bf{#1}},
+  before title={\fontsize{35}{0pt}\selectfont}, after title={},
+  center title, title={\bf{#1}}, bottomtitle=20pt,
+}
+% Section: (1) alignment (2) row skip size (3) title
+\newenvironment{sectionResume}[3]{%
+  \begin{tcboxedraster}[
+    rasterBox,
+    raster halign={#1}, halign upper={flush #1}, halign lower={flush #1},
+    raster columns=1, raster column skip=0pt,
+    raster row skip={#2},
+  ]{
+    commonBox, halign title={flush #1}, title={\bf\textsc{#3}}, bottomtitle={\sectionSpace*2},
+  }\ignorespaces
+}{%
+  \end{tcboxedraster}\ignorespacesafterend
 }
 % Section at left
 \newenvironment{sectionLeft}[1]{%
-  \headerLeft{#1}
-  \begin{tcboxedraster}[
-    commonBox, halign upper=flush right, halign lower=flush right
-  ]{
-    rasterBoxes,
-    raster halign=right, halign upper=flush right, halign lower=flush right,
-    raster columns=1, raster column skip=0pt,
-    raster row skip=\sectionSpace*2,
-  }%
+  \begin{sectionResume}{right}{\sectionSpace*2}{\large{#1}}
 }{%
-  \end{tcboxedraster}
+  \end{sectionResume}\ignorespacesafterend
 }
 % Section at right
 \newenvironment{sectionRight}[1]{%
-  \headerRight{#1}
-  \begin{tcboxedraster}[
-    commonBox, halign upper=flush left, halign lower=flush left,
-  ]{
-    rasterBoxes,
-    raster halign=left, halign upper=flush left, halign lower=flush left,
-    raster columns=1, raster column skip=0pt,
-    raster row skip=\sectionSpace,
-  }%
+  \begin{sectionResume}{left}{\sectionSpace}{\LARGE{#1}}
 }{%
-  \end{tcboxedraster}
+  \end{sectionResume}\ignorespacesafterend
 }
 % Create two sub-columns in the right column
 \newtcolorbox{rightColumnTwoBoxes}{
@@ -167,16 +154,6 @@ BoldItalicFont  = *-BoldIt,
   lefthand width=\rightColumnYearWidth, sidebyside gap=\rightColumnYearGap,
   halign upper=flush left, halign lower=flush left,
 }
-
-% header on the left column
-\newcommand{\headerLeft}[1]{
-  \tcbsubtitle[halign upper=flush right]{\bf\large\textsc{#1}}
-}
-% header on the right column
-\newcommand{\headerRight}[1]{
-  \tcbsubtitle[halign upper=flush left]{\bf\LARGE\textsc{#1}}
-}
-
 \newcommand{\address}[1]{
   \BeginAccSupp{ActualText={Address: #1}} {#1}\hspace{1ex}\faMapMarker*\EndAccSupp{}
 }
@@ -227,11 +204,11 @@ BoldItalicFont  = *-BoldIt,
 % (1) employer; (2) start time; (3) end time;
 \newenvironment{company}[3]{%
   \begin{rightColumnTwoBoxes}
-  {#2}\\{#3}
+    {#2}\\{#3}
   \tcblower
-  {\bf {#1}}\\
+    {\bf {#1}}\\
 }{%
-  \end{rightColumnTwoBoxes}
+  \end{rightColumnTwoBoxes}\ignorespacesafterend
 }
 
 % define position
@@ -248,7 +225,7 @@ BoldItalicFont  = *-BoldIt,
   }
 }{%
   % Cannot use arguments e.g. #1 inside the closing codes of custom environment
-  \endPositionCmd
+  \endPositionCmd\ignorespacesafterend
 }
 
 % define schools
@@ -277,14 +254,14 @@ BoldItalicFont  = *-BoldIt,
 %%%%%%%%%%%%%%%%%%%%
 % Left column
 %%%%%%%%%%%%%%%%%%%%
-  \begin{sectionLeft}{Contact}%
+  \begin{sectionLeft}{Contact}
     \address{Santa Clara, California}\\
     \phone{+1-857-891-7998}\\
     \email{resume@shizunge.com}\\
     \github{github.com/shizunge}\\
   \end{sectionLeft}
 
-  \begin{sectionLeft}{Skills}%
+  \begin{sectionLeft}{Skills}
     \skills{Software}{
       C++\\
       C\\
@@ -309,7 +286,7 @@ BoldItalicFont  = *-BoldIt,
     }
   \end{sectionLeft}
 
-  \begin{sectionLeft}{Recent coursework}%
+  \begin{sectionLeft}{Recent coursework}
     \rightBullet{Effective Leadership and Management}\\
     \rightBullet{IO Concepts and Protocols: PCI Express, Ethernet, and Fibre Channel}\\
     \rightBullet{Linux Device Drivers, Advanced}\\
@@ -317,7 +294,7 @@ BoldItalicFont  = *-BoldIt,
     \rightBullet{System Virtualization Fundamentals}\\
   \end{sectionLeft}
 
-  \begin{sectionLeft}{Projects}%
+  \begin{sectionLeft}{Projects}
     \githubProject{shizunge/endlessh-go}{1.1k+}{1M+}{Go, Prometheus, Grafana}\\
     \githubProject{shizunge/gantry}{70+}{1M+}{Bash, Docker}\\
   \end{sectionLeft}
@@ -326,11 +303,11 @@ BoldItalicFont  = *-BoldIt,
 % Right column
 %%%%%%%%%%%%%%%%%%%%
 \tcblower
-  \begin{sectionRight}{Summary}%
+  \begin{sectionRight}{Summary}
     \kw{Software engineering leader} with 10+ years of experience delivering high-impact simulation and verification solutions for cutting-edge computer systems, combining deep hardware-software co-design expertise with a track record of defining architecture, aligning stakeholders, execution, and team growth
   \end{sectionRight} % Summary
 
-  \begin{sectionRight}{Experience}%
+  \begin{sectionRight}{Experience}
     \begin{company}{Google}{9/2018}{Present}
       \begin{position}{Senior Software Engineer}{Sunnyvale, CA}
         \item Led a team of 8+ software engineers developing simulators for the next generation TPU, while contributing as a strong individual proficient in \kw{C++}
@@ -368,7 +345,7 @@ BoldItalicFont  = *-BoldIt,
     \end{company} % Boston University
   \end{sectionRight} % Experience
 
-  \begin{sectionRight}{Education}%
+  \begin{sectionRight}{Education}
     \degree{Certificate}{Leadership and Management (2025), Business Administration (2026)}{2025-2026\\(Expected)}
       {UC Berkeley Extension}{Online}
     \degree{Certificate}{Embedded Systems}{5/2019}
