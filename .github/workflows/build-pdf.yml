@@ -54,7 +54,7 @@ jobs:
           output: shizun_ge_resume.png
           arbitrary-parameters: '-sDEVICE=png16m -dTextAlphaBits=4 -r300'
       - name: Upload files
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: shizun_ge_resume
           path: |
