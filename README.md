@@ -8,4 +8,4 @@
 
 [![Resume image](https://github.com/shizunge/resume/releases/latest/download/shizun_ge_resume.png)](https://github.com/shizunge/resume/releases/latest/download/shizun_ge_resume.pdf)
 
-Copyright 2020-2025 Shizun Ge
+Copyright 2020-2026 Shizun Ge

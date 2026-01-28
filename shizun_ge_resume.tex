@@ -1,4 +1,4 @@
-% Copyright (C) 2020-2025 Shizun Ge
+% Copyright (C) 2020-2026 Shizun Ge
 % use xelatex, required by fontspec
 % !TEX TS-program = XeLaTeX
 \documentclass[10pt,letter]{article}
@@ -17,6 +17,15 @@
                technical leadership, cross-functional collaboration, system architecture, technical strategy, engineering excellence,
                \today},
 ]{hyperref}
+
+% Width of the left column and gap between columns.
+\def\leftColumnWidth{10.7em}
+\def\leftColumnGap{1.0em}
+\def\rightColumnYearWidth{3.9em}
+\def\rightColumnYearGap{0.5em}
+% Space between sections.
+\def\sectionSpace{3pt}
+
 \usepackage{enumitem} % Required for modifying lists
 \setlist{noitemsep,nolistsep,leftmargin=*} % Remove spacing within and around lists
 \usepackage[most]{tcolorbox} % for \begin{tcolorbox}
@@ -90,14 +99,6 @@ BoldItalicFont  = *-BoldIt,
 \definecolor{googlegreen700}{HTML}{188038}
 \definecolor{googlegreen800}{HTML}{137333}
 \definecolor{googlegreen900}{HTML}{0D652D}
-
-% Width of the left column and gap between columns.
-\def\leftColumnWidth{10.7em}
-\def\leftColumnGap{1.0em}
-\def\rightColumnYearWidth{4.2em}
-\def\rightColumnYearGap{0.5em}
-% Space between sections.
-\def\sectionSpace{3pt}
 
 % Create columes
 \tcbset{commonBox/.style={
@@ -295,8 +296,8 @@ BoldItalicFont  = *-BoldIt,
   \end{sectionLeft}
 
   \begin{sectionLeft}{Projects}
-    \githubProject{shizunge/endlessh-go}{1.1k+}{1M+}{Go, Prometheus, Grafana}\\
-    \githubProject{shizunge/gantry}{70+}{1M+}{Bash, Docker}\\
+    \githubProject{shizunge/endlessh-go}{1.2k+}{1M+}{Go, Prometheus, Grafana}\\
+    \githubProject{shizunge/gantry}{80+}{1M+}{Bash, Docker}\\
   \end{sectionLeft}
 
 %%%%%%%%%%%%%%%%%%%%
@@ -346,7 +347,7 @@ BoldItalicFont  = *-BoldIt,
   \end{sectionRight} % Experience
 
   \begin{sectionRight}{Education}
-    \degree{Certificate}{Leadership and Management (2025), Business Administration (2026)}{2025-2026\\(Expected)}
+    \degree{Certificate}{Leadership and Management, Business Administration}{2026\\(Expected)}
       {UC Berkeley Extension}{Online}
     \degree{Certificate}{Embedded Systems}{5/2019}
       {UCSC Silicon Valley Extension}{Santa Clara, CA}
