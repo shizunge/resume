@@ -16,7 +16,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Build PDF
         # You may pin to the exact commit or the version.
         # uses: xu-cheng/latex-action@dacf2cfbdd5fd768c2298cbdc9e105bd9ed7f293
